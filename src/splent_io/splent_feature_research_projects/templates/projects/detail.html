@@ -1,0 +1,53 @@
+{% extends "public_base.html" %}
+
+{% block title %}{{ project.acronym or project.title }} — {{ SPLENT_APP }}{% endblock %}
+
+{% block hero %}
+    {{ render_block('hero', eyebrow=project.acronym or _('Project'),
+                    title=project.title, subtitle=project.summary) }}
+{% endblock %}
+
+{% block content %}
+<article class="container section">
+    <p class="card__meta">
+        {% if project.status %}🏷️ {{ project.status }}{% endif %}
+    </p>
+
+    <dl class="prose" style="margin:1rem 0">
+        {% if project.principal_investigator %}
+        <dt>{{ _('Principal investigator') }}</dt><dd>{{ project.principal_investigator }}</dd>
+        {% endif %}
+        {% if project.funding_agency %}
+        <dt>{{ _('Funding agency') }}</dt><dd>{{ project.funding_agency }}</dd>
+        {% endif %}
+        {% if project.programme %}
+        <dt>{{ _('Programme') }}</dt><dd>{{ project.programme }}</dd>
+        {% endif %}
+        {% if project.reference %}
+        <dt>{{ _('Reference') }}</dt><dd>{{ project.reference }}</dd>
+        {% endif %}
+        {% if project.budget %}
+        <dt>{{ _('Budget') }}</dt><dd>{{ project.budget }}</dd>
+        {% endif %}
+        {% if project.start_date or project.end_date %}
+        <dt>{{ _('Period') }}</dt>
+        <dd>{% if project.start_date %}{{ project.start_date }}{% endif %} – {% if project.end_date %}{{ project.end_date }}{% endif %}</dd>
+        {% endif %}
+        {% if project.partners %}
+        <dt>{{ _('Partners') }}</dt><dd>{{ project.partners }}</dd>
+        {% endif %}
+        {% if project.role %}
+        <dt>{{ _('Role') }}</dt><dd>{{ project.role }}</dd>
+        {% endif %}
+    </dl>
+
+    {% if project.image %}
+    <img src="{{ project.image }}" alt="" style="max-width:100%;border-radius:var(--brand-radius);margin:1rem 0">
+    {% endif %}
+    <div class="prose">{{ project.description | safe }}</div>
+    {% if project.link %}
+    <p style="margin-top:1.5rem"><a class="btn btn-primary" href="{{ project.link }}">{{ _('More info') }}</a></p>
+    {% endif %}
+    <p style="margin-top:2rem"><a href="{{ url_for('projects.index') }}">← {{ _('Back to projects') }}</a></p>
+</article>
+{% endblock %}
