@@ -18,10 +18,19 @@ depends_on = None
 
 def upgrade():
     op.add_column("project", sa.Column("acronym", sa.String(length=64), nullable=True))
-    op.add_column("project", sa.Column("principal_investigator", sa.String(length=255), nullable=True))
-    op.add_column("project", sa.Column("funding_agency", sa.String(length=255), nullable=True))
-    op.add_column("project", sa.Column("programme", sa.String(length=255), nullable=True))
-    op.add_column("project", sa.Column("reference", sa.String(length=128), nullable=True))
+    op.add_column(
+        "project",
+        sa.Column("principal_investigator", sa.String(length=255), nullable=True),
+    )
+    op.add_column(
+        "project", sa.Column("funding_agency", sa.String(length=255), nullable=True)
+    )
+    op.add_column(
+        "project", sa.Column("programme", sa.String(length=255), nullable=True)
+    )
+    op.add_column(
+        "project", sa.Column("reference", sa.String(length=128), nullable=True)
+    )
     op.add_column("project", sa.Column("budget", sa.String(length=64), nullable=True))
     op.add_column("project", sa.Column("start_date", sa.Date(), nullable=True))
     op.add_column("project", sa.Column("end_date", sa.Date(), nullable=True))

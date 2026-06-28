@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "splent_feature_research_projects"
-version = "0.0.1"
+version = "0.1.0"
 readme = "README.md"
 requires-python = ">=3.13"
 
@@ -23,41 +23,34 @@ exclude = ["*.tests", "*.tests.*"]
 [tool.splent]
 cli_version = "1.11.0"
 
-# ── Feature Contract ──────────────────────────────────────────────────────────
-# Declares what this feature provides to and requires from the product.
-# Used by `splent feature:check` and `splent product:derive` for validation.
+# ── Feature Contract (auto-generated) ────────────────────────────────────────
+# Do not edit manually — re-run `splent feature:contract --write` to refresh.
 [tool.splent.contract]
 description = "research_projects feature"
 
 [tool.splent.contract.provides]
-# Routes exposed by this feature
-routes = ["/research_projects"]
-# Blueprint names registered into Flask
-blueprints = ["research_projects_bp"]
-# SQLAlchemy models introduced by this feature
-models = []
-# CLI commands added by this feature
-commands = []
+routes     = []
+blueprints = []
+models     = []
+commands   = ["hello"]
+hooks      = ["layout.authenticated_sidebar", "layout.scripts"]
+services   = ["ResearchProjectsService"]
+signals    = []
+translations = []
+docker     = []
 
 [tool.splent.contract.requires]
-# Other SPLENT features this feature depends on (e.g. ["auth", "mail"])
 features = ["projects"]
-# Environment variables this feature expects to be set
 env_vars = []
+signals  = []
 
-# ── Extension points ──────────────────────────────────────────────────────────
-# Declares what other features can override or extend via refinement.
-# See: splent feature:xray
 [tool.splent.contract.extensible]
-services = []
-templates = []
-models = []
-hooks = []
-routes = false
+services  = ["ResearchProjectsService"]
+templates = ["projects/admin/form.html", "projects/admin/list.html", "projects/detail.html", "projects/list.html", "research_projects/index.html"]
+models    = []
+hooks     = ["layout.authenticated_sidebar", "layout.scripts"]
+routes    = false
 
-# ── Refinement ────────────────────────────────────────────────────────────────
-# This feature refines the base 'projects' feature: it extends the Project
-# model with research-specific fields (and overrides the projects templates).
 [tool.splent.refinement]
 refines = "splent_feature_projects"
 
