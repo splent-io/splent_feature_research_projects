@@ -1,0 +1,50 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   splent_feature_research_projects — public research-project detail sheet.
+   Refines the base projects detail with a scientific field grid (PI, funding
+   agency, programme, reference, budget, period, partners, role).
+   Token-driven (--brand-*) so a skin restyles it for free. Loaded via
+   register_asset on top of the theme's public.css. No inline styles, no CDN.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Definition-list field grid ────────────────────────────────────────────
+   Bold labels in a fixed first column, values in the second. Collapses to a
+   single stacked column on narrow viewports. */
+.research-fields {
+    display: grid;
+    grid-template-columns: minmax(9rem, max-content) 1fr;
+    gap: .55rem 1.5rem;
+    margin: 1.5rem 0;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid color-mix(in srgb, var(--brand-heading, #111827) 12%, transparent);
+    border-radius: var(--brand-radius, 12px);
+    background: color-mix(in srgb, var(--brand-heading, #111827) 3%, transparent);
+}
+
+.research-fields dt {
+    margin: 0;
+    font-weight: 700;
+    color: var(--brand-heading, #111827);
+}
+
+.research-fields dd {
+    margin: 0;
+    color: var(--brand-text, #374151);
+}
+
+/* The period value keeps its en-dash range readable. */
+.research-fields .research-fields__period {
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+    .research-fields {
+        grid-template-columns: 1fr;
+        gap: .15rem 0;
+    }
+    .research-fields dt {
+        margin-top: .65rem;
+    }
+    .research-fields dt:first-child {
+        margin-top: 0;
+    }
+}

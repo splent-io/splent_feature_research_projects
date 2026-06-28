@@ -8,12 +8,27 @@
 {% endblock %}
 
 {% block content %}
-<article class="container section">
-    <p class="card__meta">
-        {% if project.status %}🏷️ {{ project.status }}{% endif %}
-    </p>
+<article class="container section project-detail">
+    {% if project.status %}
+    <div class="project-detail__header">
+        <span class="project-detail__status {% if project.status == 'past' %}project-detail__status--past{% endif %}">
+            <span class="project-detail__status-dot" aria-hidden="true"></span>{{ project.status }}
+        </span>
+    </div>
+    {% endif %}
 
-    <dl class="prose" style="margin:1rem 0">
+    {% if project.image %}
+    <img class="project-detail__image" src="{{ project.image }}" alt="">
+    {% endif %}
+
+    {% if project.description %}
+    <div class="prose project-detail__body">{{ project.description | safe }}</div>
+    {% endif %}
+
+    <dl class="research-fields">
+        {% if project.acronym %}
+        <dt>{{ _('Acronym') }}</dt><dd>{{ project.acronym }}</dd>
+        {% endif %}
         {% if project.principal_investigator %}
         <dt>{{ _('Principal investigator') }}</dt><dd>{{ project.principal_investigator }}</dd>
         {% endif %}
@@ -31,7 +46,7 @@
         {% endif %}
         {% if project.start_date or project.end_date %}
         <dt>{{ _('Period') }}</dt>
-        <dd>{% if project.start_date %}{{ project.start_date }}{% endif %} – {% if project.end_date %}{{ project.end_date }}{% endif %}</dd>
+        <dd class="research-fields__period">{% if project.start_date %}{{ project.start_date }}{% endif %} – {% if project.end_date %}{{ project.end_date }}{% endif %}</dd>
         {% endif %}
         {% if project.partners %}
         <dt>{{ _('Partners') }}</dt><dd>{{ project.partners }}</dd>
@@ -41,13 +56,10 @@
         {% endif %}
     </dl>
 
-    {% if project.image %}
-    <img src="{{ project.image }}" alt="" style="max-width:100%;border-radius:var(--brand-radius);margin:1rem 0">
-    {% endif %}
-    <div class="prose">{{ project.description | safe }}</div>
     {% if project.link %}
-    <p style="margin-top:1.5rem"><a class="btn btn-primary" href="{{ project.link }}">{{ _('More info') }}</a></p>
+    <p class="project-detail__actions"><a class="btn btn-primary" href="{{ project.link }}">{{ _('More info') }}</a></p>
     {% endif %}
-    <p style="margin-top:2rem"><a href="{{ url_for('projects.index') }}">← {{ _('Back to projects') }}</a></p>
+
+    <p><a class="project-detail__back" href="{{ url_for('projects.index') }}">← {{ _('Back to projects') }}</a></p>
 </article>
 {% endblock %}
