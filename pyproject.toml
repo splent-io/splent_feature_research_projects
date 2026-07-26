@@ -25,8 +25,11 @@ cli_version = "1.11.0"
 
 # ── Feature Contract (auto-generated) ────────────────────────────────────────
 # Do not edit manually — re-run `splent feature:contract --write` to refresh.
+# Preserved across refreshes: description, category, tags, env, and
+# requires.features_manual (dependencies invisible to static analysis).
 [tool.splent.contract]
-description = "research_projects feature"
+description = "Research projects extending projects with academic metadata"
+archetype = "full"
 
 [tool.splent.contract.provides]
 routes     = []
