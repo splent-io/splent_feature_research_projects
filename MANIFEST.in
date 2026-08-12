@@ -13,6 +13,9 @@ recursive-include src/splent_io/splent_feature_research_projects/assets *.woff *
 # Build inputs, never shipped.
 prune src/splent_io/splent_feature_research_projects/assets/node_modules
 
+# Seed images registered through the media feature at db:seed time.
+recursive-include src/splent_io/splent_feature_research_projects/seed_media *.png *.jpg *.jpeg *.gif *.webp *.svg
+
 # Jinja templates (feature views + hook fragments)
 recursive-include src/splent_io/splent_feature_research_projects/templates *.html
 
