@@ -154,7 +154,9 @@ class ResearchProjectsSeeder(BaseSeeder):
                     funding_agency=p.get("funding_agency", ""),
                     start_date=_d(p.get("start")),
                     end_date=_d(p.get("end")),
-                    image=_seed_image(p["image"], title=p["acronym"]) if p.get("image") else "",
+                    image=_seed_image(p["image"], title=p["acronym"])
+                    if p.get("image")
+                    else "",
                     order=order,
                     published=True,
                 )
