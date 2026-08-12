@@ -109,11 +109,11 @@ _PROJECTS = [
     },
     {
         "acronym": "PLANT",
-        "title": "Por resolver (to be resolved)",
+        "title": "PLANT",
         "programme": "",
         "funding_agency": "",
         "image": "plant.png",
-        "status": "past",
+        "status": "active",
     },
 ]
 
