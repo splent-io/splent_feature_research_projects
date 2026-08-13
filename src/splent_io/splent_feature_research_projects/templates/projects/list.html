@@ -2,6 +2,28 @@
 
 {% block title %}Projects — {{ SPLENT_APP }}{% endblock %}
 
+{% block head %}
+<style>
+    /* Uniform media box so badges and titles align across cards in a row,
+       regardless of each project logo's intrinsic size. Rendered for every
+       card, logo or not, so rows without images line up too. */
+    .projects-card__media {
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .75rem;
+        margin-bottom: .75rem;
+    }
+    .projects-card__media img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: var(--brand-radius);
+    }
+</style>
+{% endblock %}
+
 {% block hero %}
     {{ render_block('hero', eyebrow=_('Research'), title=_('Projects'),
                     subtitle=_('Funded research projects, active and past.')) }}
@@ -18,7 +40,9 @@
     <div class="card-grid">
         {% for p in items %}
         <a class="card" href="{{ url_for('projects.detail', slug=p.slug) }}">
-            {% if p.image %}<img class="card__img" src="{{ p.image }}" alt="">{% endif %}
+            <div class="projects-card__media">
+                {% if p.image %}<img src="{{ p.image }}" alt="">{% endif %}
+            </div>
             <span class="badge">{{ p.status }}</span>
             <h3 class="card__title">{{ p.acronym or p.title }}</h3>
             {% if p.summary %}<p class="card__text">{{ p.summary }}</p>{% endif %}
